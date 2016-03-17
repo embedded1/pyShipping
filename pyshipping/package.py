@@ -15,7 +15,7 @@ import unittest
 class Package(object):
     """Represents a package as used in cargo/shipping aplications."""
 
-    def __init__(self, size, weight=0, nosort=False):
+    def __init__(self, size, upc, weight=0, nosort=False):
         """Generates a new Package object.
 
         The size can be given as an list of integers or an string where the sizes are
@@ -35,6 +35,7 @@ class Package(object):
                                                              int(self.length)), reverse=True)
         self.volume = self.heigth * self.width * self.length
         self.size = (self.heigth, self.width, self.length)
+        self.upc = upc
 
     def _get_gurtmass(self):
         """'gurtamss' is the circumference of the box plus the length - which is often used to
