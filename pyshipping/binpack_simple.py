@@ -121,12 +121,16 @@ def packbin(bin, packages):
 
 def packit(bin, originalpackages):
     packedbins = []
+    rest = None
     packages = sorted(originalpackages)
-
-    packagesinbin, (binx, biny, binz), rest = packbin(bin, packages)
-    if packagesinbin:
-        #we were able to pack some items (if rest is None, all items are packed)
+    while packages:
+        packagesinbin, (binx, biny, binz), rest = packbin(bin, packages)
+        if not packagesinbin:
+            # we were not able to pack anything
+            break
         packedbins.append(packagesinbin)
+        packages = rest
+    # we now have a result, try to get a better result by rotating some bins
     return packedbins, rest
 
 

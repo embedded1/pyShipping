@@ -27,12 +27,12 @@ class Package(object):
         """
         self.weight = weight
         if "x" in size:
-            self.heigth, self.width, self.length = [int(x) for x in size.split('x')]
+            self.heigth, self.width, self.length = [float(x) for x in size.split('x')]
         else:
             self.heigth, self.width, self.length = size
         if not nosort:
-            (self.heigth, self.width, self.length) = sorted((int(self.heigth), int(self.width),
-                                                             int(self.length)), reverse=True)
+            (self.heigth, self.width, self.length) = sorted((float(self.heigth), float(self.width),
+                                                             float(self.length)), reverse=True)
         self.volume = self.heigth * self.width * self.length
         self.size = (self.heigth, self.width, self.length)
         self.title = title
@@ -153,15 +153,15 @@ class Package(object):
 
     def __str__(self):
         if self.weight:
-            return "%dx%dx%d %dg" % (self.heigth, self.width, self.length, self.weight)
+            return "%fx%fx%d %f" % (self.heigth, self.width, self.length, self.weight)
         else:
-            return "%dx%dx%d" % (self.heigth, self.width, self.length)
+            return "%fx%fx%f" % (self.heigth, self.width, self.length)
 
     def __repr__(self):
         if self.weight:
-            return "<Package %dx%dx%d %d>" % (self.heigth, self.width, self.length, self.weight)
+            return "<Package %fx%fx%f %f>" % (self.heigth, self.width, self.length, self.weight)
         else:
-            return "<Package %dx%dx%d>" % (self.heigth, self.width, self.length)
+            return "<Package %fx%fx%f>" % (self.heigth, self.width, self.length)
 
 
 def buendelung(kartons, maxweight=31000, maxgurtmass=3000):
