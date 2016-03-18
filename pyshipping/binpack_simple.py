@@ -121,15 +121,10 @@ def packbin(bin, packages):
 
 def packit(bin, originalpackages):
     packedbins = []
-    rest = None
     packages = sorted(originalpackages)
-    while packages:
-        packagesinbin, (binx, biny, binz), rest = packbin(bin, packages)
-        if not packagesinbin:
-            # we were not able to pack anything
-            break
+    packagesinbin, (binx, biny, binz), rest = packbin(bin, packages)
+    if packagesinbin:
         packedbins.append(packagesinbin)
-        packages = rest
     # we now have a result, try to get a better result by rotating some bins
     return packedbins, rest
 
@@ -182,7 +177,7 @@ def trypack(bin, packages, bestpack):
         bestpack['bincount'] = len(bins)
         bestpack['bins'] = bins
         bestpack['rest'] = rest
-    if bestpack['bincount'] < 2:
+    if not rest:
         raise Timeout('optimal solution found')
     return len(packages)
 
