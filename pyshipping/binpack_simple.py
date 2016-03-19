@@ -156,6 +156,7 @@ class Timeout(Exception):
 
 
 def allpermutations_helper(permuted, todo, maxcounter, callback, bin, bestpack, counter):
+    print """"""""""""""
     if not todo:
         return counter + callback(bin, permuted, bestpack)
     else:
